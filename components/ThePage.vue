@@ -1,5 +1,5 @@
-<template>
-<page-base />
+<template lang="pug">
+page-base
 </template>
 
 <script>

@@ -1,9 +1,8 @@
-<template>
-<el-container>
-  <el-header />
+<template lang="pug">
+el-container
+  el-header
 
-  <el-main />
-</el-container>
+  el-main
 </template>
 
 <script>
