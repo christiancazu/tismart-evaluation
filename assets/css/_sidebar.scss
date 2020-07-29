@@ -1,0 +1,95 @@
+.sidebar {
+  background-color: $bgSidebar;
+  max-width: $sideBarWidth;
+  z-index: 100;
+  &--collapse {
+    max-width: 64px;
+  }
+  transition: all .5s;
+
+  &__container {
+    position: fixed;
+    width: $sideBarWidth;
+    min-height: 100vh;
+  }
+
+  &__header {
+    margin: 24px 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+
+    &__avatar {
+      height: 56px;
+      width: 56px;
+      transition: all .5s;
+      &--collapse {
+        @extend .px-0;
+        @extend .mx-0;
+      }
+    }
+    &__separator {
+      margin: 4px 16px;
+      border: 1px solid $colorBorder;
+      min-height: 100%;
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &--title {
+        @extend .text-accent;
+      }
+      &--caption {
+        @extend .text-caption;
+      }
+    }
+  }
+
+  &__subheader {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+
+    &__info {
+      &--title {
+        @extend .text-accent;
+      }
+      &--caption {
+        padding: 8px 0;
+        @extend .text-caption;
+      }
+      i {
+        @extend .text-accent;
+        font-size: 24px;
+      }
+      span {
+        color: $--color-primary;
+        @extend .text-accent;
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__menu {
+    transition: all .5s;
+    &--text {
+      text-transform: uppercase;
+      @extend .text-accent;
+    }
+  }
+
+  &__collapse-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 8px;
+  }
+}
+
+.icon-logout {
+  align-self: flex-start;
+  font-size: 24px;
+  color: $--color-primary;
+  transform: rotate(90deg);
+}

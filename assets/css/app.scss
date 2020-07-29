@@ -1,3 +1,49 @@
+@import 'variables.scss';
+@import 'sidebar.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: $fontPrimary;
+  background-color: $bgBody;
+}
+
+.min-h-100 {
+  min-height: 100vh;
+}
+
+.min-w-100 {
+  min-width: 100vh;
+}
+
+.shadow {
+  box-shadow: 0 0 12px 0 rgba(220, 220, 220, .75);
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+.m-0 {
+  margin: 0 !important;
+}
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+// BASE
+.text-caption {
+  color: $colorTextCaption;
+  font-size: $sizeTextCaption;
+}
+.text-accent {
+  font-weight: 600;
 }
