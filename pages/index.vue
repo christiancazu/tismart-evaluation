@@ -1,13 +1,4 @@
 <template lang="pug">
-  h1.title {{ app }}
+page-base(title="Nueva Carrera")
+  <career-form />
 </template>
-
-<script>
-export default {
-  setup () {
-    return {
-      app: 'TISMART'
-    };
-  }
-};
-</script>

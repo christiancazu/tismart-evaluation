@@ -19,10 +19,8 @@ el-aside(
         src="/img/app-logo.png",
         :class="isCollapse && 'sidebar__header__avatar--collapse'"
       ).sidebar__header__avatar
-      template(
-        v-if="!isCollapse",
-        class="sidebar__header__separator"
-      )
+      template(v-if="!isCollapse")
+        div.sidebar__header__separator
         div.sidebar__header__info
           p.sidebar__header__info--caption {{ country.placeholder }}
           p.sidebar__header__info--title {{ country.name }}

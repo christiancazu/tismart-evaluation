@@ -1,5 +1,6 @@
 @import 'variables.scss';
 @import 'sidebar.scss';
+@import 'page.scss';
 
 * {
   padding: 0;
@@ -37,6 +38,25 @@ body {
 .mx-0 {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.label-input {
+  text-align: right;
+  padding: 8px;
+  width: 100px;
+  color: $colorTextCaption;
 }
 
 // BASE

@@ -3,7 +3,7 @@
 
   <the-sidebar />
 
-  <the-page />
+  <nuxt />
 
 </el-container>
 </template>
