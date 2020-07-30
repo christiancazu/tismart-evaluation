@@ -40,7 +40,8 @@ export default {
   plugins: [
     '@/plugins/axios',
     '@/plugins/composition-api',
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/api'
   ],
   /*
   ** Auto import components
@@ -66,7 +67,9 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {},
+  axios: {
+    baseURL: process.env.API_URL
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

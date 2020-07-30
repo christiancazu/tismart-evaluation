@@ -35,7 +35,7 @@ export const code = [
   }
 ];
 
-export const cycles = [
+export const cycle = [
   {
     required: true,
     message: 'La contraseña es requerida'
@@ -49,7 +49,7 @@ export const cycleZero = [
   }
 ];
 
-export const facultie = [
+export const faculty = [
   {
     required: true,
     message: 'La contraseña es requerida'

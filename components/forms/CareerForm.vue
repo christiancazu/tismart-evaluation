@@ -40,11 +40,12 @@ section
         el-form-item(label="Facultad", prop="facultie")
           el-select(
             placeholder="Seleccione"
-            v-model="form.facultie"
+            v-model="form.faculty"
           )
             el-option(
-              label="foo",
-              value="foo"
+              v-for="faculty in faculties" :key="faculty.id",
+              :label="faculty.name",
+              :value="faculty.id"
             )
 
   p.cycles Cursos por Carrera
@@ -64,16 +65,16 @@ section
 <script>
 import * as RULES from '@/config/form.rules';
 
-import { reactive } from '@vue/composition-api';
+import { reactive, computed } from '@vue/composition-api';
 
 export default {
-  setup () {
+  setup (_, { root }) {
     const form = reactive({
       name: 'Comunicación',
       code: 'CD2-12HR',
       cycles: 0,
-      cycleZero: true,
-      facultie: null
+      cycleZero: false,
+      faculty: null
     });
 
     const rules = reactive({
@@ -81,8 +82,10 @@ export default {
       code: RULES.code,
       cycles: RULES.cycle,
       cycleZero: RULES.cycleZero,
-      facultie: RULES.facultie
+      faculty: RULES.faculty
     });
+
+    const faculties = computed(() => root.$store.state.faculties.faculties);
 
     function onChangeCycles (amount) {
       form.cycles = amount;
@@ -91,6 +94,7 @@ export default {
     return {
       form,
       rules,
+      faculties,
       onChangeCycles
     };
   }

@@ -9,20 +9,20 @@ el-card(shadow="never", class="cycle")
       @change="handleSelectedCourse"
     )
       el-option(
-        v-for="course in availableCourses" :key="course.value",
-        :label="course.label",
-        :value="course.value"
+        v-for="course in availableCourses" :key="course.id",
+        :value="course.id",
+        :label="course.name"
       )
   section.cycle__courses
     el-tag(
-      v-for="cycleCourse in cycleCourses" :key="cycleCourse.value",
+      v-for="cycleCourse in cycleCourses" :key="cycleCourse.id",
       type="primary",
       effect="dark",
       size="small",
       class="cycle__courses__tag",
       closable,
       @close="handleRemoveCourse(cycleCourse)"
-    ) {{ cycleCourse.label }}
+    ) {{ cycleCourse.name }}
 
 </template>
 
@@ -36,37 +36,33 @@ export default {
     }
   },
 
-  setup () {
-    const courses = ref([
-      { value: '1', label: 'foo' },
-      { value: '2', label: 'bar' }
-    ]);
-
+  setup (_, { root }) {
     const cycleCourses = ref([]);
-
     const courseSelected = ref(null);
 
-    function handleRemoveCourse (courseToRemove) {
-      cycleCourses.value = cycleCourses.value.filter(cc => cc.value !== courseToRemove.value);
-      courseSelected.value = null;
-    }
-
-    function handleSelectedCourse (courseValue) {
-      const existsInCycleCourses = cycleCourses.value
-        .find(cycleCourse => cycleCourse.value === courseValue);
-
-      if (!existsInCycleCourses) {
-        const selectedCourse = courses.value.find(course => course.value === courseValue);
-        cycleCourses.value.push(selectedCourse);
-      }
-    }
+    const courses = computed(() => root.$store.state.courses.courses);
 
     const availableCourses = computed(
       () => courses.value
         .filter(course => !cycleCourses.value
-          .map(cc => cc.value).includes(course.value)
+          .map(cc => cc.id).includes(course.id)
         )
     );
+
+    function handleRemoveCourse (courseToRemove) {
+      cycleCourses.value = cycleCourses.value.filter(cc => cc.id !== courseToRemove.id);
+      courseSelected.value = null;
+    }
+
+    function handleSelectedCourse (courseId) {
+      const existsInCycleCourses = cycleCourses.value
+        .find(cycleCourse => cycleCourse.id === courseId);
+
+      if (!existsInCycleCourses) {
+        const selectedCourse = courses.value.find(course => course.id === courseId);
+        cycleCourses.value.push(selectedCourse);
+      }
+    }
 
     return {
       courses,
