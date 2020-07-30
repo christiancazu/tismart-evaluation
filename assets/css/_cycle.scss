@@ -19,3 +19,15 @@
     }
   }
 }
+
+.cycles {
+  padding-bottom: 96px;
+
+  &__title {
+    color: $--color-primary;
+    font-size: 20px;
+    margin: 16px 0;
+    @extend .text-accent;
+
+  }
+}

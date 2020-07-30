@@ -6,7 +6,7 @@ el-card(shadow="never", class="cycle")
       v-model="courseSelected",
       filterable,
       placeholder="Agregar curso al ciclo",
-      @change="handleSelectedCourse"
+      @change="handleSelectedCourse(availableCourses.find(ac => ac.id === $event))"
     )
       el-option(
         v-for="course in availableCourses" :key="course.id",
@@ -27,7 +27,7 @@ el-card(shadow="never", class="cycle")
 </template>
 
 <script>
-import { ref, computed } from '@vue/composition-api';
+import { ref, computed, onMounted, onBeforeUnmount } from '@vue/composition-api';
 
 export default {
   props: {
@@ -36,32 +36,45 @@ export default {
     }
   },
 
-  setup (_, { root }) {
+  setup (props, { root }) {
+    onMounted(() => {
+      root.$store.commit('cycles/ADD_CREATED_CYCLE', {
+        cycleNumber: props.number,
+        courses: []
+      });
+    });
+
+    onBeforeUnmount(() => {
+      root.$store.commit('cycles/REMOVE_CREATED_CYCLE', props.number);
+    });
+
     const cycleCourses = ref([]);
     const courseSelected = ref(null);
 
     const courses = computed(() => root.$store.state.courses.courses);
-
-    const availableCourses = computed(
-      () => courses.value
-        .filter(course => !cycleCourses.value
-          .map(cc => cc.id).includes(course.id)
-        )
-    );
+    const availableCourses = computed(() => root.$store.getters['courses/availableCourses']);
 
     function handleRemoveCourse (courseToRemove) {
+      root.$store.commit('courses/REMOVE_FROM_ASSIGNED_COURSE', courseToRemove);
+      root.$store.commit('cycles/REMOVE_COURSE_FROM_CYCLE', {
+        cycleNumber: props.number,
+        course: courseToRemove
+      });
       cycleCourses.value = cycleCourses.value.filter(cc => cc.id !== courseToRemove.id);
       courseSelected.value = null;
     }
 
-    function handleSelectedCourse (courseId) {
-      const existsInCycleCourses = cycleCourses.value
-        .find(cycleCourse => cycleCourse.id === courseId);
-
-      if (!existsInCycleCourses) {
-        const selectedCourse = courses.value.find(course => course.id === courseId);
-        cycleCourses.value.push(selectedCourse);
-      }
+    function handleSelectedCourse (selectedCourse) {
+      root.$store.commit('courses/ADD_ASSIGNED_COURSE', {
+        selectedCourse,
+        callback () {
+          cycleCourses.value.push(selectedCourse);
+          root.$store.commit('cycles/ADD_COURSE_TO_CYCLE', {
+            cycleNumber: props.number,
+            course: selectedCourse
+          });
+        }
+      });
     }
 
     return {

@@ -2,6 +2,8 @@
 @import 'sidebar.scss';
 @import 'page.scss';
 @import 'cycle.scss';
+@import 'form.scss';
+
 
 * {
   padding: 0;
@@ -53,15 +55,8 @@ body {
   align-self: center;
 }
 
-.cycles {
-  color: $--color-primary;
-  font-size: 20px;
-  margin: 16px 0;
-  @extend .text-accent;
-}
-
-.form {
-  margin-bottom: 36px;
+.uppercase {
+  text-transform: uppercase;
 }
 
 // BASE

@@ -7,6 +7,12 @@ export default {
     type: 'success'
   }),
 
+  warning: (message = '') => Notification.warning({
+    title: 'Atención',
+    message,
+    type: 'warning'
+  }),
+
   error: (message = 'Algo salió mal') => Notification.error({
     title: 'Error',
     message,

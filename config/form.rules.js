@@ -35,23 +35,9 @@ export const code = [
   }
 ];
 
-export const cycle = [
-  {
-    required: true,
-    message: 'La contraseña es requerida'
-  }
-];
-
-export const cycleZero = [
-  {
-    required: true,
-    message: 'La contraseña es requerida'
-  }
-];
-
 export const faculty = [
   {
     required: true,
-    message: 'La contraseña es requerida'
+    message: 'Debe seleccionar una facultad'
   }
 ];

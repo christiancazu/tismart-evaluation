@@ -1,0 +1,17 @@
+.form {
+  margin-bottom: 36px;
+
+  &__actions {
+    position: fixed; 
+    bottom: 0; 
+    left:0; 
+    width: 100%;
+    
+    &__card {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 48px;
+      text-transform: uppercase;
+    }
+  }
+}
