@@ -1,6 +1,7 @@
 @import 'variables.scss';
 @import 'sidebar.scss';
 @import 'page.scss';
+@import 'cycle.scss';
 
 * {
   padding: 0;
@@ -17,8 +18,8 @@ body {
   min-height: 100vh;
 }
 
-.min-w-100 {
-  min-width: 100vh;
+.w-100 {
+  width: 100%;
 }
 
 .shadow {
@@ -52,11 +53,15 @@ body {
   align-self: center;
 }
 
-.label-input {
-  text-align: right;
-  padding: 8px;
-  width: 100px;
-  color: $colorTextCaption;
+.cycles {
+  color: $--color-primary;
+  font-size: 20px;
+  margin: 16px 0;
+  @extend .text-accent;
+}
+
+.form {
+  margin-bottom: 36px;
 }
 
 // BASE

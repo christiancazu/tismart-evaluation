@@ -1,0 +1,20 @@
+.cycle {
+  margin: 16px 0;
+  padding: 0;
+  width: 90%;
+
+  &__header {
+    display: flex;
+    p {
+     margin-right: 8px; 
+     padding: 8px 8px 0 0;
+    }
+  }
+
+  &__courses {
+    margin-top: 16px;
+    &__tag {
+      margin-right: 20px;
+    }
+  }
+}

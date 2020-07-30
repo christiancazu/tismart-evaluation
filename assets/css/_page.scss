@@ -1,12 +1,13 @@
 .page {
-  padding: 64px 24px 8px;
+  padding: 64px 32px 8px;
 
   &__header {
+    padding: 0;
     font-weight: 700;
     font-size: $sizeTextPageHeader;
     display: flex;
     i {
-      padding-right: 8px;
+      transform: translateX(-50%);
       align-self: center;
       @extend .text-accent;
       font-size: 16px;
