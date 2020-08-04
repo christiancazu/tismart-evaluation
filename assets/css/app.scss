@@ -65,5 +65,7 @@ body {
   font-size: $sizeTextCaption;
 }
 .text-accent {
-  font-weight: 600;
+  color: $colorTextAccent;
+  font-weight: 700;
+  letter-spacing: 0.34px;
 }

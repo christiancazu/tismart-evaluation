@@ -14,35 +14,44 @@
   }
 
   &__header {
-    margin: 24px 8px;
-    padding: 16px;
+    margin: 28px 0;
+    padding: 0 21px;
     display: flex;
-    justify-content: center;
 
     &__avatar {
-      height: 56px;
-      width: 56px;
+      height: 70px;
+      width: 61px;
+      margin-left: 4px;
+      margin-bottom: 6px;
+      background-color: transparent;
       transition: all .5s;
+      img {
+        padding: 8px 6px;
+      }
       &--collapse {
         @extend .px-0;
         @extend .mx-0;
       }
     }
     &__separator {
-      margin: 4px 16px;
+      margin: 4px 12.5px;
       border: 1px solid $colorBorder;
-      min-height: 100%;
+      height: 51px;
+      align-self: flex-end;
     }
     &__info {
+      align-self: flex-end;
       display: flex;
       flex-direction: column;
       justify-content: center;
 
       &--title {
         @extend .text-accent;
+        font-size: 18px;
       }
       &--caption {
         @extend .text-caption;
+        letter-spacing: 0.2px;
       }
     }
   }
@@ -50,25 +59,29 @@
   &__subheader {
     display: flex;
     justify-content: space-between;
-    padding: 16px;
+    padding: 22px;
 
     &__info {
       &--title {
         @extend .text-accent;
+        font-size: 17px;
       }
       &--caption {
-        padding: 8px 0;
+        margin: 4px 0 14px;
         @extend .text-caption;
+        font-size: 11px !important;
       }
-      i {
-        @extend .text-accent;
-        font-size: 24px;
+      img {
+        padding-right: 9px;
       }
       span {
         color: $--color-primary;
-        @extend .text-accent;
-        font-size: 24px;
+        font-weight: 700;
+        font-size: 20px;
       }
+    }
+    & img.logout-icon {
+      align-self: flex-start;
     }
   }
 
@@ -82,14 +95,29 @@
 
   &__collapse-btn {
     position: absolute;
-    bottom: 16px;
-    right: 8px;
+    bottom: 0px;
+    right: 0px;
   }
 }
 
-.icon-logout {
-  align-self: flex-start;
-  font-size: 24px;
-  color: $--color-primary;
-  transform: rotate(90deg);
+.el-menu-item {
+  height: 41px;
+  line-height: 3;
+  margin: 9px 0;
+  font-size: 12px;
+  &.is-active span {
+    color: $--color-primary !important;
+  }
 }
+
+.el-button--small {
+  padding: 6px;
+}
+
+.btn-collapse {
+  transition: transform .25s;
+}
+.btn-is-collapse {
+  transform: rotate(180deg);
+}
+

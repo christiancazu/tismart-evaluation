@@ -16,9 +16,10 @@ el-aside(
       class="sidebar__header"
     )
       el-avatar(
-        src="/img/app-logo.png",
+        src="/img/img_logowabu.png",
         :class="isCollapse && 'sidebar__header__avatar--collapse'"
-      ).sidebar__header__avatar
+        class="sidebar__header__avatar"
+      )
       template(v-if="!isCollapse")
         div.sidebar__header__separator
         div.sidebar__header__info
@@ -33,9 +34,9 @@ el-aside(
       div.sidebar__subheader__info
         p.sidebar__subheader__info--title {{ user.fullname }}
         p.sidebar__subheader__info--caption {{ user.role }}
-        i.el-icon-arrow-left
+        img(src="/img/path-3.svg")
         span PUCP
-      i.el-icon-upload2.icon-logout
+      img(src="/img/icon_logout.png", class="logout-icon")
 
     //- SIDEBAR MENU
     section(
@@ -48,12 +49,11 @@ el-aside(
         background-color="transparent"
       )
         el-menu-item(
-          v-for="nav in navs" :key="nav.id",
+          v-for="nav in navs" :key="nav.id"
           :index="nav.id"
          )
           i(:class="nav.icon")
           span(
-            slot="title",
             class="sidebar__menu--text"
           ) {{ nav.name }}
 
@@ -61,10 +61,15 @@ el-aside(
     section.sidebar__collapse-btn
       el-button(
         type="primary",
-        :icon="isCollapse ? 'el-icon-right' : 'el-icon-back'",
         size="small",
         @click="isCollapse = !isCollapse"
       )
+        img(
+          src="/img/ic_expand.png"
+          class="btn-collapse"
+          :class="isCollapse && 'btn-is-collapse'"
+        )
+
 </template>
 
 <script>

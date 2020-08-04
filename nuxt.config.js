@@ -23,7 +23,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800', type: 'text/css' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap', type: 'text/css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Asap:wght@600;700&display=swap', type: 'text/css' }
     ]
   },
   /*
@@ -38,7 +39,6 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/axios',
     '@/plugins/composition-api',
     '@/plugins/element-ui',
     '@/plugins/api'
