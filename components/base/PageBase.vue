@@ -14,12 +14,6 @@ export default {
     title: {
       type: String, required: true
     }
-  },
-
-  setup () {
-    return {
-      app: 'TISMART'
-    };
   }
 };
 </script>

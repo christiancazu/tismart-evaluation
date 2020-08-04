@@ -2,12 +2,12 @@
 div
   section
     el-form(
-      ref="refForm",
-      :model="form",
-      :rules="rules",
-      status-icon,
-      label-width="80px",
-      class="form",
+      ref="refForm"
+      :model="form"
+      :rules="rules"
+      status-icon
+      label-width="80px"
+      class="form"
     )
       el-row(
         :gutter="24"
@@ -16,6 +16,7 @@ div
           el-form-item(label="Nombre", prop="name")
             el-input(
               v-model="form.name"
+              @input="onInputFormItem('name')"
             )
         el-col(:md="5")
           el-form-item(label="Ciclos", prop="cycles")
@@ -35,13 +36,14 @@ div
           el-form-item(label="Código", prop="code")
             el-input(
               v-model="form.code",
-              @input="form.code = $event.toUpperCase()"
+              @input="onInputFormItem('code', $event)"
             )
         el-col(:md="8")
           el-form-item(label="Facultad", prop="faculty")
             el-select(
               placeholder="Seleccione"
               v-model="form.faculty"
+              @change="onInputFormItem('faculty')"
             )
               el-option(
                 v-for="faculty in faculties" :key="faculty.id",
@@ -101,6 +103,12 @@ export default {
       faculty: null
     });
 
+    const formValidItems = reactive({
+      name: false,
+      code: false,
+      faculty: false
+    });
+
     const rules = reactive({
       name: RULES.name,
       code: RULES.code,
@@ -116,17 +124,21 @@ export default {
     const existsCycles = computed(() => root.$store.getters['cycles/existsCycles']);
     const createdCycles = computed(() => root.$store.state.cycles.createdCycles);
 
-    watch(() => form.name, () => checkFormValid());
-    watch(() => form.code, () => checkFormValid());
-    watch(() => form.faculty, () => checkFormValid());
+    // watching for name, code, faculty if are valid to enable availableSubmit button
+    watch(
+      () => [
+        formValidItems.name,
+        formValidItems.code,
+        formValidItems.faculty
+      ], (formValidItems) => {
+        availableSubmit.value = formValidItems.every(formValidItem => formValidItem);
+      });
 
     function onChangeCycles (amount) {
       form.cycles = amount;
     }
 
     function submitForm () {
-      checkFormValid();
-
       switch (true) {
         // no cycles
         case !existsCycles.value:
@@ -145,8 +157,19 @@ export default {
     }
 
     async function sendRequest () {
-      const requestFaculty = faculties.value.find(faculty => faculty.id === form.faculty);
-      const requestCourses = createdCycles.value.map(cc => cc.courses.map(c => ({ _id: c.id, name: c.name }))).flat(Infinity);
+      const requestFaculty = faculties.value
+        .find(faculty => faculty.id === form.faculty);
+
+      const requestCourses = createdCycles.value
+        .map(cc => cc.courses
+          .map(c => (
+            {
+              _id: c.id,
+              name: c.name
+            }
+          ))
+        )
+        .flat(Infinity);
 
       const data = {
         name: form.name,
@@ -177,23 +200,23 @@ export default {
       }
     }
 
-    function checkFormValid () {
-      refForm.value.validate((valid) => {
-        if (valid) {
-          availableSubmit.value = true;
-        } else {
-          availableSubmit.value = false;
-        }
-      });
-    }
-
     function resetForm () {
       form.cycles = 0;
       refForm.value.resetFields();
+
+      formValidItems.name = false;
+      formValidItems.code = false;
+      formValidItems.faculty = false;
+
       root.$store.commit('courses/RESET_ASSIGNED_COURSE');
-      setTimeout(() => {
-        refForm.value.clearValidate(['name', 'code', 'faculty']);
-      }, 500);
+    }
+
+    function onInputFormItem (propName, $event) {
+      if (propName === 'code') {
+        form.code = $event.toUpperCase();
+      }
+
+      refForm.value.validateField(propName, (e) => { formValidItems[propName] = !e; });
     }
 
     return {
@@ -204,7 +227,9 @@ export default {
       onChangeCycles,
       availableSubmit,
       processingSubmit,
-      submitForm
+      submitForm,
+      onInputFormItem,
+      formValidItems
     };
   }
 };

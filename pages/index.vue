@@ -1,13 +1,13 @@
 <template lang="pug">
 page-base(title="Nueva Carrera")
-  <career-form />
+  career-form
 </template>
 
 <script>
 import notifyUtil from '@/utils/notify.util';
 
 export default {
-  async asyncData ({ store, $notify }) {
+  async asyncData ({ store }) {
     try {
       await store.dispatch('courses/get');
       await store.dispatch('faculties/get');
