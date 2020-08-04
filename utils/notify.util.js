@@ -7,7 +7,7 @@ export default {
     type: 'success'
   }),
 
-  warning: (message = '') => Notification.warning({
+  warn: (message = '') => Notification.warning({
     title: 'Atención',
     message,
     type: 'warning'

@@ -89,9 +89,10 @@ div
 
 <script>
 import * as RULES from '@/config/form.rules';
+import notifyUtil from '@/utils/notify.util';
+import MESSAGES from '@/config/messages';
 
 import { reactive, computed, ref, watch } from '@vue/composition-api';
-import notifyUtil from '@/utils/notify.util';
 
 export default {
   setup (_, { root }) {
@@ -142,12 +143,12 @@ export default {
       switch (true) {
         // no cycles
         case !existsCycles.value:
-          notifyUtil.warning('debe Elegir algún ciclo');
+          notifyUtil.warn(MESSAGES.CYCLE.WARN.CHOOSE_SOME);
           break;
 
         // no courses in cycles
         case !existsCoursesInAllCycles.value:
-          notifyUtil.warning('Los ciclos deben de contener cursos, añada al menos uno');
+          notifyUtil.warn(MESSAGES.CYCLE.WARN.NEEDED_COURSE);
           break;
 
         // valid params to prepared request
@@ -157,9 +158,11 @@ export default {
     }
 
     async function sendRequest () {
+      // preparing faculty
       const requestFaculty = faculties.value
         .find(faculty => faculty.id === form.faculty);
 
+      // preparing courses
       const requestCourses = createdCycles.value
         .map(cc => cc.courses
           .map(c => (
@@ -171,6 +174,7 @@ export default {
         )
         .flat(Infinity);
 
+      // merging data to request
       const data = {
         name: form.name,
         code: form.code,
@@ -186,14 +190,14 @@ export default {
 
         await root.$store.dispatch('careers/create', data);
 
-        notifyUtil.success('La carrera ha sido creada con éxito');
+        notifyUtil.success(MESSAGES.CAREER.SUCCESS.CREATED);
 
         resetForm();
       } catch (error) {
         if (error.response.status === 409) {
-          notifyUtil.error('El código de carrera ya existe, intente con uno diferente');
+          notifyUtil.error(MESSAGES.CAREER.ERROR.CODE_EXISTS);
         } else {
-          notifyUtil.error('Algo sucedió mal al intentar crear la carrera, intente más tarde');
+          notifyUtil.error(MESSAGES.CAREER.ERROR.FAIL);
         }
       } finally {
         processingSubmit.value = false;
@@ -211,6 +215,13 @@ export default {
       root.$store.commit('courses/RESET_ASSIGNED_COURSE');
     }
 
+    /**
+     * validating the form propName & setting on formValidItems it VALID value
+     *
+     * @param {String} propName form prop name
+     * @param {Event} $event input event
+     *
+     */
     function onInputFormItem (propName, $event) {
       if (propName === 'code') {
         form.code = $event.toUpperCase();
