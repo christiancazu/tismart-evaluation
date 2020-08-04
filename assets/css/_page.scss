@@ -1,16 +1,16 @@
 .page {
-  padding: 64px 32px 8px;
+  padding: 78px 71.5px 8px;
 
   &__header {
     padding: 0;
     font-weight: 700;
     font-size: $sizeTextPageHeader;
+    letter-spacing: 0.72px;
     display: flex;
-    i {
-      transform: translateX(-50%);
+
+    img {
       align-self: center;
-      @extend .text-accent;
-      font-size: 16px;
+      transform: translate(-16px, -10px);
     }
   }
 }

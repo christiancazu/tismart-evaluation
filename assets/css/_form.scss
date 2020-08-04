@@ -7,10 +7,15 @@
     left:0; 
     width: 100%;
     
+    & span {
+      font-family: $fontPrimary;
+      font-size: 12px;
+    }
+    
     &__card {
       display: flex;
       justify-content: flex-end;
-      padding: 16px 48px;
+      padding: 5px 45px;
       text-transform: uppercase;
     }
   }

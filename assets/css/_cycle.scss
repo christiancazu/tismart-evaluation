@@ -8,6 +8,7 @@
     p {
      margin-right: 8px; 
      padding: 8px 8px 0 0;
+     color: $colorTextAccent;
     }
   }
 
@@ -16,6 +17,7 @@
     &__tag {
       margin-right: 20px;
       margin-bottom: 8px;
+      font-family: 'Open Sans';
     }
   }
 }
@@ -24,10 +26,9 @@
   padding-bottom: 96px;
 
   &__title {
-    color: $--color-primary;
+    color: $--color-primary !important;
     font-size: 20px;
-    margin: 16px 0;
-    @extend .text-accent;
+    letter-spacing: 0.4px;
 
   }
 }

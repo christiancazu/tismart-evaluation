@@ -1,10 +1,10 @@
 <template lang="pug">
 el-container.page
   el-header.page__header
-    i.el-icon-arrow-left
+    img(src="/img/path-3.svg")
     div {{ title }}
 
-  el-main
+  el-main.px-0
     slot
 </template>
 

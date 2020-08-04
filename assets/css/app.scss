@@ -59,10 +59,15 @@ body {
   text-transform: uppercase;
 }
 
+.el-form-item__label, .el-checkbox__label {
+  color: #909399;
+  font-family: 'Open Sans';
+}
 // BASE
 .text-caption {
   color: $colorTextCaption;
   font-size: $sizeTextCaption;
+  font-family: 'Open Sans';
 }
 .text-accent {
   color: $colorTextAccent;
